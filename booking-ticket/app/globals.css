@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/*
+ * Vinyl Noir — the design system defined in DESIGN.MD at the repo root.
+ * Every value below is copied from that file's token tables. Nothing here is
+ * invented: if a value is missing from DESIGN.MD it does not belong in the UI.
+ */
+@theme {
+  /* Surfaces */
+  --color-stage: #15110e;
+  --color-stage-lift: #1c1815;
+  --color-card: #262220;
+
+  /* Ink */
+  --color-bone: #ece6dc;
+  --color-bone-50: #8a8278;
+
+  /* Accent — reserved for the selected seat, the hold meter, and the armed CTA */
+  --color-amber: #d97a2c;
+  --color-amber-soft: rgba(217, 122, 44, 0.14);
+
+  /* Lines */
+  --color-hairline: rgba(236, 230, 220, 0.08);
+  --color-divider: rgba(236, 230, 220, 0.1);
+  --color-outline: rgba(236, 230, 220, 0.18);
+
+  /* Type */
+  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", monospace;
+
+  /* Radius */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 9999px;
+
+  /* Elevation */
+  --shadow-card: rgba(0, 0, 0, 0.4) 0 1px 0 inset, rgba(0, 0, 0, 0.5) 0 8px 24px -12px;
+  --shadow-button: rgba(0, 0, 0, 0.3) 0 1px 2px;
+
+  /* Motion — "page turn": deliberate, measured */
+  --ease-standard: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-stage);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  letter-spacing: -0.005em;
+}
+
+/* DESIGN.MD §3: numerals in tables, timers and prices are tabular mono. */
+.numeric {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* DESIGN.MD §3 "Label": mono 10px, 0.10em tracking, uppercase. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-bone-50);
+}
+
+/* Pro tokens → Button focus: 1.5px amber, 4px offset. Applied globally so no
+   interactive element can ship without a visible focus ring. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 1.5px solid var(--color-amber);
+  outline-offset: 4px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
